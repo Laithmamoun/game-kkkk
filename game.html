@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>تخمين الرقم</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>تخمين الرقم</h1>
+  <p>قم بتخمين الرقم بين 1 و 100:</p>
+  <input type="number" id="guess" min="1" max="100">
+  <button onclick="checkGuess()">تحقق</button>
+  <p id="message"></p>
+
+  <script>
+    // اختيار رقم عشوائي بين 1 و 100
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+    function checkGuess() {
+      const guessInput = document.getElementById('guess');
+      const guess = parseInt(guessInput.value);
+      const message = document.getElementById('message');
+
+      if (isNaN(guess) || guess < 1 || guess > 100) {
+        message.textContent = 'الرجاء إدخال رقم صحيح بين 1 و 100.';
+      } else {
+        if (guess === randomNumber) {
+          message.textContent = 'تهانينا! لقد حزرت الرقم الصحيح.';
+          guessInput.disabled = true;
+        } else if (guess < randomNumber) {
+          message.textContent = 'الرقم أكبر من ' + guess + '.';
+        } else if (guess > randomNumber) {
+          message.textContent = 'الرقم أصغر من ' + guess + '.';
+        }
+      }
+
+      guessInput.value = '';
+      guessInput.focus();
+    }
+  </script>
+</body>
+</html>
